@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ماشین حساب حرفه‌ای</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.4.3/decimal.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Vazir';
+            src: url('https://cdn.jsdelivr.net/gh/rastikerdar/vazir-font@v30.1.0/dist/Vazir.woff2') format('woff2');
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazir', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f2f5, #d0d9ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .calculator {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            margin-bottom: 30px;
+            transition: 0.3s;
+        }
+        
+        .calculator:hover {
+            transform: scale(1.02);
+        }
+        
+        input[type="text"], select {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        input[type="text"]:focus, select:focus {
+            border-color: #4c6ef5;
+            box-shadow: 0 0 0 4px rgba(76, 110, 245, 0.3);
+            outline: none;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #4c6ef5, #3d5afe);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: bold;
+            width: 100%;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(76, 110, 245, 0.3);
+        }
+        
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(76, 110, 245, 0.4);
+        }
+        
+        button:active {
+            transform: scale(0.98);
+        }
+        
+        #result {
+            margin-top: 25px;
+            padding: 20px;
+            background: #f8fafc;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            font-size: 1.3rem;
+            min-height: 60px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>ماشین حساب حرفه‌ای</h1>
+    
+    <div class="calculator">
+        <input type="text" id="num1" placeholder="عدد اول">
+        <input type="text" id="num2" placeholder="عدد دوم">
+        
+        <select id="operation">
+            <option value="add">جمع (+)</option>
+            <option value="subtract">تفریق (-)</option>
+            <option value="multiply">ضرب (×)</option>
+            <option value="divide">تقسیم (÷)</option>
+            <option value="power">توان (^)</option>
+            <option value="modulo">باقیمانده (MOD)</option>
+            <option value="sqrt">جذر (√)</option>
+        </select>
+        
+        <button onclick="calculate()">محاسبه</button>
+    </div>
+    
+    <div id="result"></div>
+    
+    <div class="footer">
+        ساخته شده توسط اشکان ادبیه
+    </div>
+</body>
+</html>

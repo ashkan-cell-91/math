@@ -1,0 +1,45 @@
+{% extends 'detector/base.html' %}
+{% block content %}
+
+<!-- Header-->
+<header class="bg-dark py-5">
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <h1 class="display-4 fw-bolder">وارد شدن</h1>
+            <p class="lead fw-normal text-white-50 mb-0">در اینجا میتوانید خودتان را به ما معرفی کرده تا ما آماری از بازدید کنندگان سایت داشته باشیم</p>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow my-5">
+                <div class="card-body p-5">
+                    <h2 class="text-center mb-4">فرم ثبت نام</h2>
+                    <form method="POST" action="{% url 'register' %}">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                            <label for="id_first_name" class="form-label">نام</label>
+                            {{ form.first_name }}
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="id_last_name" class="form-label">نام خانوادگی</label>
+                            {{ form.last_name }}
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                ثبت نام کنید
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

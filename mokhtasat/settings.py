@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'mokhtasat.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://postgres:postgres@localhost:5432/math',
+        default='postgresql://postgres:postgres@localhost:5432/mokhtasat',
         conn_max_age=600
     )
 }

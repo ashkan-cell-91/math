@@ -22,7 +22,7 @@ def search_data(request):
         return JsonResponse({'query': query, 'results': results})
     
     # در غیر این صورت صفحه HTML را با نتایج جستجو رندر می‌کند.
-    return render(request, 'detector/search.html', {'results': results, 'query': query})
+    return render(request, 'detector/search_data.html', {'results': results, 'query': query})
 
 def home(request):
     all_products = Product.objects.all()

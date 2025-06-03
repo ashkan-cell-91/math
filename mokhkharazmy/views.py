@@ -14,26 +14,25 @@ data = {
 }
 
 def search_data(request):
-    query = request.GET.get('q', '').lower()  # دریافت مقدار جستجو از URL
-    results = data.get(query, ["نتیجه‌ای یافت نشد!"])
-    
-    # اگر درخواست با هدر AJAX ارسال شده باشد، داده‌ها را به صورت JSON برگردان
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-        return JsonResponse({'query': query, 'results': results})
-    
-    # در غیر این صورت صفحه HTML را با نتایج جستجو رندر می‌کند.
-    return render(request, 'detector/search_data.html', {'results': results, 'query': query})
+    if request.method == 'GET':
+        query = request.GET.get('q', '').lower()
+        results = data.get(query, ["نتیجه‌ای یافت نشد!"])
+        
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return JsonResponse({'query': query, 'results': results})
+        
+        return render(request, 'detector/search_data.html', {'results': results, 'query': query})
+    return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 def home(request):
     all_products = Product.objects.all()
-    return render(request, 'detector/index.html', {'products': all_products})  # مسیر به Template خود  
+    return render(request, 'detector/index.html', {'products': all_products})
 
 def calculate_shape(request):
     return render(request, 'detector/calculate_shape.html')
 
 def calculater(request):
     return render(request, 'detector/calculater.html')
-
 
 def register(request):
     if request.method == 'POST':

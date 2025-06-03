@@ -7,22 +7,6 @@ from django.http import JsonResponse
 
 
 # داده‌های نمونه برای جستجو
-data = {
-    "python": ["آموزش مقدماتی Python", "بهترین کتاب‌های Python", "فریم‌ورک Django و Python"],
-    "javascript": ["ES6 و ویژگی‌های جدید JavaScript", "آموزش React.js", "Node.js و توسعه سمت سرور"],
-    "html": ["راهنمای کامل HTML5", "بهترین تمرین‌های طراحی وب", "CSS و طراحی پیشرفته"]
-}
-
-def search_data(request):
-    if request.method == 'GET':
-        query = request.GET.get('q', '').lower()
-        results = data.get(query, ["نتیجه‌ای یافت نشد!"])
-        
-        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
-            return JsonResponse({'query': query, 'results': results})
-        
-        return render(request, 'detector/search_data.html', {'results': results, 'query': query})
-    return JsonResponse({'error': 'Method not allowed'}, status=405)
 
 def home(request):
     all_products = Product.objects.all()

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>مرورگر اختصاصی</title>
     <style>
         body {
@@ -24,14 +24,14 @@
 </head>
 <body>
     <h1>مرورگر اختصاصی</h1>
-    <input type="text" id="searchInput" placeholder="جستجو کنید...">
+    <input type="text" id="searchInput" placeholder="جستجو کنید..." />
     <button id="searchBtn">جستجو</button>
     <div id="results"></div>
 
     <script>
         document.getElementById('searchBtn').addEventListener('click', () => {
             let query = document.getElementById('searchInput').value;
-            fetch(`http://localhost:8000/search_data/?q=${encodeURIComponent(query)}`, {
+            fetch(`{% url 'search_data' %}?q=${encodeURIComponent(query)}`, { // اصلاح مسیر
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
@@ -39,9 +39,16 @@
             .then(response => response.json())
             .then(data => {
                 let resultsContainer = document.getElementById('results');
-                resultsContainer.innerHTML = data.results.map(r => `<p>${r}</p>`).join('');
+                if (data.results && data.results.length > 0 && data.results[0] !== "نتیجه‌ای یافت نشد!") {
+                    resultsContainer.innerHTML = data.results.map(r => `<p>${r}</p>`).join('');
+                } else {
+                    resultsContainer.innerHTML = `<p>نتیجه‌ای یافت نشد!</p>`;
+                }
             })
-            .catch(error => console.error('خطا در دریافت داده‌ها', error));
+            .catch(error => {
+                console.error('خطا در دریافت داده‌ها', error);
+                document.getElementById('results').innerHTML = `<p>خطا در بارگذاری نتایج.</p>`;
+            });
         });
     </script>
 </body>

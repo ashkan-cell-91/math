@@ -13,5 +13,4 @@ urlpatterns = [
     path('calculate/', views.calculate_shape, name='calculate_shape'),
     path('calculater/', views.calculater, name='calculater'),
     path('register/', views.register, name='register'),
-    path('search_data/', views.search_data, name='search_data'),
 ]+static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
